@@ -80,7 +80,11 @@ def grad_logger(named_params):
     stats.first_layer = None
     stats.last_layer = None
     for n, p in named_params:
-        if (p.grad is not None) and not (n.endswith('.bias') or len(p.shape) == 1):
+        if (
+            p.grad is not None
+            and not n.endswith('.bias')
+            and len(p.shape) != 1
+        ):
             grad_norm = float(torch.norm(p.grad.data))
             stats.update(grad_norm)
             if 'qkv' in n:

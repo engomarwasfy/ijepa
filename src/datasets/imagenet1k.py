@@ -110,9 +110,7 @@ class ImageNet(torchvision.datasets.ImageFolder):
         logger.info('Initialized ImageNet')
 
         if index_targets:
-            self.targets = []
-            for sample in self.samples:
-                self.targets.append(sample[1])
+            self.targets = [sample[1] for sample in self.samples]
             self.targets = np.array(self.targets)
             self.samples = np.array(self.samples)
 
